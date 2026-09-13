@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Membership Application — Oxford-Miami Community Toastmasters</title>
+<style>
+  :root {
+    --tm-blue: #004165;
+    --tm-red: #772432;
+    --tm-gold: #F2DF74;
+    --tm-gray: #63666A;
+    --tm-light: #f7f8f9;
+    --border: #d5dadd;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    color: #222;
+    background: var(--tm-light);
+    margin: 0;
+    padding: 0;
+  }
+  .header {
+    background: var(--tm-blue);
+    color: #fff;
+    padding: 28px 24px;
+    text-align: center;
+  }
+  .header h1 {
+    margin: 0 0 6px 0;
+    font-size: 1.6em;
+  }
+  .header p {
+    margin: 0;
+    color: var(--tm-gold);
+    font-size: 0.95em;
+  }
+  .container {
+    max-width: 860px;
+    margin: 24px auto;
+    background: #fff;
+    padding: 32px 40px 48px;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+  .instructions {
+    background: #eef3f6;
+    border-left: 4px solid var(--tm-blue);
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    font-size: 0.95em;
+  }
+  .instructions ol { margin: 8px 0 0 20px; padding: 0; }
+  .instructions li { margin-bottom: 4px; }
+  fieldset {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 24px;
+    padding: 18px 22px 22px;
+  }
+  legend {
+    font-weight: 600;
+    color: var(--tm-blue);
+    padding: 0 8px;
+    font-size: 1.05em;
+  }
+  .fieldset-note {
+    font-size: 0.85em;
+    color: var(--tm-gray);
+    font-style: italic;
+    margin: -6px 0 14px 0;
+  }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 14px;
+  }
+  .field {
+    flex: 1 1 200px;
+    display: flex;
+    flex-direction: column;
+  }
+  .field.small { flex: 0 1 140px; }
+  label {
+    font-size: 0.85em;
+    color: var(--tm-gray);
+    margin-bottom: 4px;
+  }
+  input[type="text"], input[type="email"], input[type="tel"], input[type="date"], select, textarea {
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.95em;
+    font-family: inherit;
+    width: 100%;
+  }
+  .radio-group, .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: center;
+  }
+  .radio-group label, .checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.95em;
+    color: #222;
+  }
+  .radio-group input, .checkbox-group input {
+    margin: 0;
+  }
+  .dues-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  .dues-table td {
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9em;
+  }
+  .dues-table td.amt { text-align: right; }
+  .dues-table input[type="text"] {
+    width: 90px;
+    text-align: right;
+  }
+  .agreement-box {
+    background: var(--tm-light);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    font-size: 0.88em;
+    line-height: 1.5;
+    color: #333;
+    max-height: 220px;
+    overflow-y: auto;
+    margin-bottom: 16px;
+  }
+  .promise-list {
+    columns: 2;
+    column-gap: 30px;
+    font-size: 0.9em;
+    padding-left: 18px;
+  }
+  .promise-list li { margin-bottom: 8px; break-inside: avoid; }
+  .sig-row {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+  }
+  .sig-field {
+    flex: 1 1 260px;
+    border-top: 1px solid #999;
+    padding-top: 6px;
+    font-size: 0.85em;
+    color: var(--tm-gray);
+  }
+  .sig-field input {
+    border: none;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+    margin-bottom: 4px;
+  }
+  .payment-warning {
+    background: #fff4e5;
+    border-left: 4px solid #cc8400;
+    padding: 12px 18px;
+    font-size: 0.9em;
+    margin-bottom: 18px;
+  }
+  .submit-bar {
+    text-align: center;
+    margin-top: 32px;
+  }
+  button.submit-btn {
+    background: var(--tm-red);
+    color: #fff;
+    border: none;
+    padding: 12px 36px;
+    font-size: 1em;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  button.submit-btn:hover { background: #5c1b26; }
+  .footer-note {
+    text-align: center;
+    font-size: 0.8em;
+    color: var(--tm-gray);
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .officer-only {
+    background: #f1eef7;
+    border: 1px dashed #9a8fbf;
+  }
+  .officer-only legend { color: #5b4a8a; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Oxford-Miami Community Toastmasters</h1>
+  <p>Membership Application</p>
+</div>
+
+<div class="container">
+
+  <div class="instructions">
+    <strong>To become a club member, please:</strong>
+    <ol>
+      <li>Completely fill out this Membership Application below.</li>
+      <li>Completely fill out the Payment Information section.</li>
+      <li>Submit the completed form to a club officer.</li>
+      <li>Check the assistive technology box below if applicable.</li>
+    </ol>
+    <p style="margin-top:10px;">Questions? Contact <a href="mailto:membership@toastmasters.org">membership@toastmasters.org</a></p>
+    <label style="display:flex; align-items:center; gap:8px; margin-top:10px; font-size:0.9em;">
+      <input type="checkbox" id="assistiveTech"> I use assistive technology (such as a screen reader) to view educational materials.
+    </label>
+  </div>
+
+  <form id="membershipForm">
+
+    <fieldset class="officer-only">
+      <legend>Club Information <span style="font-weight:400; font-size:0.8em;">(completed by a club officer)</span></legend>
+      <div class="row">
+        <div class="field small"><label>Club Number</label><input type="text" name="clubNumber"></div>
+        <div class="field"><label>Club Name</label><input type="text" name="clubName" value="Oxford-Miami Community Toastmasters"></div>
+        <div class="field"><label>Club City</label><input type="text" name="clubCity" value="Oxford, OH"></div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Applicant Information</legend>
+      <div class="row">
+        <div class="field"><label>Last Name / Surname</label><input type="text" name="lastName" required></div>
+        <div class="field"><label>First Name</label><input type="text" name="firstName" required></div>
+        <div class="field"><label>Middle Name</label><input type="text" name="middleName"></div>
+      </div>
+
+      <p style="font-size:0.85em; color:var(--tm-gray); margin-bottom:6px;">Correspondence mailing address:</p>
+      <div class="row">
+        <div class="field"><label>Organization / In Care Of</label><input type="text" name="orgCareOf"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>Address Line 1 (max 35 characters)</label><input type="text" name="address1" maxlength="35"></div>
+        <div class="field"><label>Address Line 2 (max 35 characters)</label><input type="text" name="address2" maxlength="35"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>City</label><input type="text" name="city"></div>
+        <div class="field"><label>State or Province</label><input type="text" name="state"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>Country</label><input type="text" name="country" value="United States"></div>
+        <div class="field"><label>Postal Code</label><input type="text" name="postalCode"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>Home Phone Number</label><input type="tel" name="homePhone"></div>
+        <div class="field"><label>Mobile Phone Number</label><input type="tel" name="mobilePhone"></div>
+        <div class="field"><label>Email Address</label><input type="email" name="email" required></div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>Gender</label>
+          <div class="radio-group">
+            <label><input type="radio" name="gender" value="male"> Male</label>
+            <label><input type="radio" name="gender" value="female"> Female</label>
+            <label><input type="radio" name="gender" value="nonbinary"> Non-binary</label>
+            <label><input type="radio" name="gender" value="decline"> Decline to respond</label>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="officer-only">
+      <legend>Membership Type <span style="font-weight:400; font-size:0.8em;">(completed by a club officer)</span></legend>
+      <div class="radio-group" style="margin-bottom:14px;">
+        <label><input type="radio" name="memberType" value="new"> New</label>
+        <label><input type="radio" name="memberType" value="dual"> Dual</label>
+        <label><input type="radio" name="memberType" value="transfer"> Transfer</label>
+        <label><input type="radio" name="memberType" value="reinstated"> Reinstated (break in membership)</label>
+        <label><input type="radio" name="memberType" value="renewing"> Renewing (no break in membership)</label>
+      </div>
+      <p class="fieldset-note">If transferring, complete the four fields below.</p>
+      <div class="row">
+        <div class="field small"><label>Date of Transfer (MM/YYYY)</label><input type="text" name="transferDate" placeholder="MM/YYYY"></div>
+        <div class="field"><label>Previous Club Name</label><input type="text" name="prevClubName"></div>
+        <div class="field small"><label>Previous Club Number</label><input type="text" name="prevClubNumber"></div>
+        <div class="field small"><label>Member Number</label><input type="text" name="memberNumber"></div>
+      </div>
+    </fieldset>
+
+    <fieldset class="officer-only">
+      <legend>Sponsor of New, Reinstated, or Dual Member <span style="font-weight:400; font-size:0.8em;">(completed by a club officer)</span></legend>
+      <p class="fieldset-note">Transfer and renewing members are not eligible to be sponsored. Sponsor's last name and member number are required.</p>
+      <div class="row">
+        <div class="field"><label>Sponsor's Last Name / Surname</label><input type="text" name="sponsorLast"></div>
+        <div class="field"><label>Sponsor's First Name</label><input type="text" name="sponsorFirst"></div>
+        <div class="field small"><label>Sponsor's Member Number</label><input type="text" name="sponsorNumber"></div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Toastmasters International Dues and Fees</legend>
+      <p class="fieldset-note">Dues and fees are payable in advance and are not refundable or transferable. See the Toastmasters International Tax and Legal Resources page for applicable tax rates.</p>
+      <table class="dues-table">
+        <tr>
+          <td>1. New member fee (US$25) — paid only by new members</td>
+          <td class="amt">US$ <input type="text" name="newMemberFee"></td>
+        </tr>
+        <tr>
+          <td>2. Membership dues (pro-rated from start month, paid twice a year)</td>
+          <td class="amt">US$ <input type="text" name="membershipDues"></td>
+        </tr>
+        <tr>
+          <td>3. Sales tax</td>
+          <td class="amt">US$ <input type="text" name="salesTax"></td>
+        </tr>
+        <tr>
+          <td><strong>4. Total payment to Toastmasters International</strong></td>
+          <td class="amt">US$ <input type="text" name="totalDues"></td>
+        </tr>
+      </table>
+      <div class="row" style="margin-top:14px;">
+        <div class="field small"><label>Membership Start Month/Year</label><input type="text" name="membershipStart" placeholder="MM/YYYY"></div>
+      </div>
+      <p class="fieldset-note" style="margin-top:10px;">Pro-rated dues reference schedule (Districted): Oct $72 · Nov $60 · Dec $48 · Jan $36 · Feb $24 · Mar $12; Apr–Sep follow the same six-month cycle. Club dues are paid directly to the club — World Headquarters does not collect club dues.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Payment Information</legend>
+      <div class="payment-warning">
+        <strong>Note:</strong> For security, do not enter full card numbers into this web form. Please deliver card details directly to a club officer in person or by phone, or use check/money order as noted below.
+      </div>
+      <div class="radio-group" style="margin-bottom:14px;">
+        <label><input type="radio" name="paymentMethod" value="mastercard"> MasterCard</label>
+        <label><input type="radio" name="paymentMethod" value="visa"> Visa</label>
+        <label><input type="radio" name="paymentMethod" value="amex"> AMEX</label>
+        <label><input type="radio" name="paymentMethod" value="discover"> Discover</label>
+        <label><input type="radio" name="paymentMethod" value="check"> Check or Money Order</label>
+        <label><input type="radio" name="paymentMethod" value="other"> Other</label>
+      </div>
+      <div class="row">
+        <div class="field small"><label>Amount</label><input type="text" name="paymentAmount"></div>
+        <div class="field"><label>Check / Money Order Number (if applicable)</label><input type="text" name="checkNumber"></div>
+        <div class="field"><label>Other (describe)</label><input type="text" name="paymentOther"></div>
+      </div>
+      <p class="fieldset-note" style="margin-top:14px;">Card payments require expiration date, name on card, and signature — collected securely offline, not via this web form.</p>
+
+      <p style="font-weight:600; color:var(--tm-blue); margin-top:20px;">Billing address for payment to World Headquarters</p>
+      <label style="display:flex; align-items:center; gap:8px; margin-bottom:10px; font-size:0.9em;">
+        <input type="checkbox" name="sameAsShipping"> Same as shipping / correspondence address above
+      </label>
+      <div class="row">
+        <div class="field"><label>Address Line 1</label><input type="text" name="billAddress1"></div>
+        <div class="field"><label>Address Line 2</label><input type="text" name="billAddress2"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>City</label><input type="text" name="billCity"></div>
+        <div class="field"><label>State or Province</label><input type="text" name="billState"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>Country</label><input type="text" name="billCountry"></div>
+        <div class="field"><label>Postal Code</label><input type="text" name="billPostal"></div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Member's Agreement and Release</legend>
+      <div class="agreement-box">
+        <p>Consistent with my desire to take personal responsibility for my conduct, individually and as a member of a Toastmasters club, I agree to abide by the principles contained in A Toastmaster's Promise, the Toastmasters International Governing Documents, and my club. I will refrain from any form of discrimination, harassment, bullying, derogatory, illegal, or unethical conduct, and I understand that if I engage in such conduct, I may be responsible to reimburse Toastmasters International, my club or other clubs, or other individuals involved with Toastmasters, for any damages, losses, or costs resulting from my conduct.</p>
+        <p>Understanding that Toastmasters programs are conducted by volunteers who cannot be effectively screened or supervised by Toastmasters International or its clubs, I release and discharge Toastmasters International, its clubs, governing bodies, officers, employees, agents, and representatives from any liability for the intentional or negligent acts or omissions of any member or officer of my club or other clubs, or any officer of Toastmasters International. Should a dispute of some nature arise, I expressly agree to resolve all disputes, claims, and charges relating to Toastmasters, Districts, clubs, and Toastmasters members in accordance with Protocol 3.0: Ethics and Conduct.</p>
+        <p>By submitting this application, I expressly agree to the collection, use, and processing of the personal information I provide for organization administration, payment of dues, and inclusion in a members' directory distributed to members and employees of Toastmasters, including information collected through Toastmasters' website and electronic communications. I agree that my information may be accessed and used by Toastmasters, its employees and agents, District leaders, and club officers. I will maintain and update my personal contact information via my profile at www.toastmasters.org/Login.</p>
+      </div>
+
+      <p style="font-weight:600; color:var(--tm-blue);">A Toastmaster's Promise</p>
+      <p style="font-size:0.9em; color:var(--tm-gray); margin-top:-4px;">As a member of Toastmasters International and my club, I promise:</p>
+      <ul class="promise-list">
+        <li>To attend club meetings regularly</li>
+        <li>To prepare all of my projects to the best of my ability, basing them on the Toastmasters education program</li>
+        <li>To prepare for and fulfill meeting assignments</li>
+        <li>To provide fellow members with helpful, constructive evaluations</li>
+        <li>To help the club maintain the positive, friendly environment necessary for all members to learn and grow</li>
+        <li>To serve my club as an officer when called upon to do so</li>
+        <li>To treat my fellow club members and our guests with respect and courtesy</li>
+        <li>To bring guests to club meetings so they can see the benefits Toastmasters membership offers</li>
+        <li>To adhere to the guidelines and rules for all Toastmasters education and recognition programs</li>
+        <li>To act within Toastmasters' core values of integrity, respect, service, and excellence during the conduct of all Toastmasters activities</li>
+      </ul>
+
+      <label style="display:flex; align-items:flex-start; gap:8px; margin-top:16px; font-size:0.92em;">
+        <input type="checkbox" name="agreeTerms" required style="margin-top:3px;">
+        <span>I agree to the terms of A Toastmaster's Promise and the Member's Agreement and Release stated above, and I certify that I am 18 years of age or older, in compliance with the Toastmasters Club Constitution for Clubs of Toastmasters International. I acknowledge that my electronic signature is legally equivalent to my handwritten signature.</span>
+      </label>
+
+      <p style="margin-top:18px; font-size:0.9em;">Occasionally Toastmasters would like to contact you with service, educational, and organizational updates. If you consent, please check acceptable contact methods:</p>
+      <div class="checkbox-group" style="margin-bottom:10px;">
+        <label><input type="checkbox" name="contactMail"> Mail</label>
+        <label><input type="checkbox" name="contactEmail"> Email</label>
+        <label><input type="checkbox" name="contactPhone"> Phone</label>
+      </div>
+      <label style="display:flex; align-items:center; gap:8px; font-size:0.9em;">
+        <input type="checkbox" name="optOutNonEssential"> I would rather not receive non-essential communications.
+      </label>
+
+      <div class="sig-row">
+        <div class="sig-field">
+          <input type="text" name="applicantSignature" placeholder="Type full name as signature"><br>
+          Applicant's Signature &amp; Date
+        </div>
+        <div class="sig-field officer-only" style="border-top:1px solid #999;">
+          <input type="text" name="officerSignature" placeholder="Club officer signature (completed by officer)"><br>
+          Club Officer's Signature &amp; Date
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="submit-bar">
+      <button type="submit" class="submit-btn">Submit Application to Club Officer</button>
+    </div>
+  </form>
+
+  <div class="footer-note">
+    <p>Both applicant and club officer signatures are required for this application to be valid. For the full privacy policy, visit
+    <a href="https://www.toastmasters.org/Footer/Privacy-Policy" target="_blank" rel="noopener">toastmasters.org/Footer/Privacy-Policy</a>.</p>
+    <p>© Toastmasters International. Form based on Item 800, Membership Application. Oxford-Miami Community Toastmasters —
+    <a href="https://oxfordoh.toastmastersclubs.org/" target="_blank" rel="noopener">oxfordoh.toastmastersclubs.org</a></p>
+  </div>
+
+</div>
+
+<script>
+  document.getElementById('membershipForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+
+    const skipKeys = new Set(['clubNumber','clubName','clubCity','memberType','transferDate','prevClubName','prevClubNumber','memberNumber','sponsorLast','sponsorFirst','sponsorNumber','officerSignature']);
+
+    let lines = [];
+    for (const [key, value] of data.entries()) {
+      if (skipKeys.has(key)) continue;
+      if (!value) continue;
+      lines.push(`${key}: ${value}`);
+    }
+
+    const subject = encodeURIComponent(`Membership Application: ${form.firstName.value} ${form.lastName.value}`);
+    const body = encodeURIComponent(
+      `New membership application submitted via oxfordoh.toastmastersclubs.org\n\n` + lines.join('\n')
+    );
+
+    window.location.href = `mailto:vpm-2846914@toastmastersclubs.org?subject=${subject}&body=${body}`;
+  });
+
+  document.querySelector('input[name="sameAsShipping"]').addEventListener('change', function(e){
+    if (e.target.checked) {
+      const form = document.getElementById('membershipForm');
+      form.billAddress1.value = form.address1.value;
+      form.billAddress2.value = form.address2.value;
+      form.billCity.value = form.city.value;
+      form.billState.value = form.state.value;
+      form.billCountry.value = form.country.value;
+      form.billPostal.value = form.postalCode.value;
+    }
+  });
+</script>
+
+</body>
+</html>
